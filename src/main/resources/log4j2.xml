@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30">
+    <Appenders>
+        <RollingFile name="RollingFile" fileName ="logs/sequence-gen-svc.log" filePattern="logs/sequence-gen-svc-%d{yyyy-MM-dd}.%i.log.gz" >
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%marker] - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <!-- Following property defines how many old file we want to retails-->
+            <DefaultRolloverStrategy max="1000"/>
+        </RollingFile>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%marker] - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="warn">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+        <Logger name="com.sequence" level="info"/>
+    </Loggers>
+
+</Configuration>
